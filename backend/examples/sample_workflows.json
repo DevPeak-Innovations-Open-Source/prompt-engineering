@@ -1,0 +1,180 @@
+{
+  "workflows": [
+    {
+      "name": "Simple Delay Workflow",
+      "description": "A basic workflow demonstrating delay node",
+      "start_node": "delay1",
+      "nodes": [
+        {
+          "id": "delay1",
+          "name": "Wait 2 seconds",
+          "type": "delay",
+          "config": {
+            "seconds": 2
+          },
+          "next_nodes": []
+        }
+      ]
+    },
+    {
+      "name": "HTTP API Workflow",
+      "description": "Fetches data from an API and processes it",
+      "start_node": "fetch",
+      "nodes": [
+        {
+          "id": "fetch",
+          "name": "Fetch GitHub User",
+          "type": "http_request",
+          "config": {
+            "url": "https://api.github.com/users/{username}",
+            "method": "GET",
+            "headers": {
+              "User-Agent": "mini-n8n"
+            },
+            "timeout": 30
+          },
+          "next_nodes": ["check"]
+        },
+        {
+          "id": "check",
+          "name": "Check Response",
+          "type": "condition",
+          "config": {
+            "field": "status_code",
+            "operator": "==",
+            "value": 200,
+            "true_branch": "process",
+            "false_branch": null
+          },
+          "next_nodes": []
+        },
+        {
+          "id": "process",
+          "name": "Extract Name",
+          "type": "python_code",
+          "config": {
+            "code": "output['username'] = input_data['body']['login']\noutput['name'] = input_data['body']['name']\noutput['repos'] = input_data['body']['public_repos']",
+            "timeout": 30
+          },
+          "next_nodes": []
+        }
+      ]
+    },
+    {
+      "name": "Conditional Branching Workflow",
+      "description": "Demonstrates conditional logic with branching",
+      "start_node": "check_temperature",
+      "nodes": [
+        {
+          "id": "check_temperature",
+          "name": "Check Temperature",
+          "type": "condition",
+          "config": {
+            "field": "temperature",
+            "operator": ">",
+            "value": 25,
+            "true_branch": "hot_weather",
+            "false_branch": "cold_weather"
+          },
+          "next_nodes": []
+        },
+        {
+          "id": "hot_weather",
+          "name": "Hot Weather Action",
+          "type": "python_code",
+          "config": {
+            "code": "output['message'] = 'It is hot! Stay hydrated.'\noutput['recommendation'] = 'wear light clothes'",
+            "timeout": 5
+          },
+          "next_nodes": []
+        },
+        {
+          "id": "cold_weather",
+          "name": "Cold Weather Action",
+          "type": "python_code",
+          "config": {
+            "code": "output['message'] = 'It is cold! Stay warm.'\noutput['recommendation'] = 'wear warm clothes'",
+            "timeout": 5
+          },
+          "next_nodes": []
+        }
+      ]
+    },
+    {
+      "name": "Data Processing Pipeline",
+      "description": "Multi-step data processing with Python",
+      "start_node": "input",
+      "nodes": [
+        {
+          "id": "input",
+          "name": "Validate Input",
+          "type": "python_code",
+          "config": {
+            "code": "if 'numbers' not in input_data:\n    raise ValueError('numbers field is required')\noutput['numbers'] = input_data['numbers']",
+            "timeout": 5
+          },
+          "next_nodes": ["calculate"]
+        },
+        {
+          "id": "calculate",
+          "name": "Calculate Statistics",
+          "type": "python_code",
+          "config": {
+            "code": "import statistics\nnums = input_data['numbers']\noutput['sum'] = sum(nums)\noutput['average'] = statistics.mean(nums)\noutput['median'] = statistics.median(nums)\noutput['max'] = max(nums)\noutput['min'] = min(nums)",
+            "timeout": 10
+          },
+          "next_nodes": ["format"]
+        },
+        {
+          "id": "format",
+          "name": "Format Results",
+          "type": "python_code",
+          "config": {
+            "code": "output['report'] = f\"Statistics:\\nSum: {input_data['sum']}\\nAverage: {input_data['average']:.2f}\\nMedian: {input_data['median']}\\nMax: {input_data['max']}\\nMin: {input_data['min']}\"",
+            "timeout": 5
+          },
+          "next_nodes": []
+        }
+      ]
+    },
+    {
+      "name": "LLM Content Generator",
+      "description": "Uses LLM to generate content (requires LLM configuration)",
+      "start_node": "generate",
+      "nodes": [
+        {
+          "id": "generate",
+          "name": "Generate Story",
+          "type": "llm",
+          "config": {
+            "prompt": "Write a short story about {topic} in {style} style.",
+            "temperature": 0.8,
+            "max_tokens": 500,
+            "system_message": "You are a creative writer."
+          },
+          "next_nodes": ["delay"]
+        },
+        {
+          "id": "delay",
+          "name": "Wait Before Saving",
+          "type": "delay",
+          "config": {
+            "seconds": 1
+          },
+          "next_nodes": ["save"]
+        },
+        {
+          "id": "save",
+          "name": "Save Story",
+          "type": "python_code",
+          "config": {
+            "code": "output['story'] = input_data['llm_response']\noutput['topic'] = input_data['topic']\noutput['style'] = input_data['style']\noutput['status'] = 'saved'",
+            "timeout": 5
+          },
+          "next_nodes": []
+        }
+      ]
+    }
+  ]
+}
+
