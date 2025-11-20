@@ -4,35 +4,35 @@ A lightweight, Python-based automation engine inspired by n8n.io
 
 Build, execute, and manage workflows using modular nodes — including HTTP calls, conditions, Python code, and LLM-powered automation.
 
-✨ Key Features
+Key Features:
 
-🧩 Modular Node System – Easily extend with custom node types
+--> Modular Node System – Easily extend with custom node types
 
-🌐 HTTP Request Node – Full REST API support (GET, POST, PUT, DELETE)
+--> HTTP Request Node – Full REST API support (GET, POST, PUT, DELETE)
 
-⏱️ Delay Node – Pause execution for a specified duration
+--> Delay Node – Pause execution for a specified duration
 
-⚖️ Condition Node – Branch logic dynamically using operators (==, >, contains, etc.)
+--> Condition Node – Branch logic dynamically using operators (==, >, contains, etc.)
 
-🧮 Python Code Node – Run custom Python code securely
+-->Python Code Node – Run custom Python code securely
 
-🤖 LLM Node – Integrate with OpenAI, Google Gemini, or other LLMs
+--> LLM Node – Integrate with OpenAI, Google Gemini, or other LLMs
 
-⚡ Asynchronous Execution – Built with FastAPI and async/await
+--> Asynchronous Execution – Built with FastAPI and async/await
 
-🔁 Workflow Orchestration – Robust engine to manage execution order & state
+--> Workflow Orchestration – Robust engine to manage execution order & state
 
-🧠 AI Workflow Generation – Create workflows from plain English descriptions
+--> AI Workflow Generation – Create workflows from plain English descriptions
 
-💾 Persistent Storage – SQLite (async) or PostgreSQL via SQLAlchemy
+--> Persistent Storage – SQLite (async) or PostgreSQL via SQLAlchemy
 
-🧱 RESTful API – Complete API for workflow management & execution
+--> RESTful API – Complete API for workflow management & execution
 
-🐳 Docker Support – Simple container deployment
+--> Docker Support – Simple container deployment
 
-🧪 Full Test Suite – Nodes, orchestrator, and API coverage
+--> Full Test Suite – Nodes, orchestrator, and API coverage
 
-📦 Installation
+--------Installation------------------
 Prerequisites
 
 Python 3.11+
@@ -42,7 +42,7 @@ pip
 (Optional) Docker & Docker Compose
 
 Local Setup
-git clone <repository-url>
+git clone <https://github.com/DevPeak-Innovations-Open-Source/prompt-engineering.git>
 cd mini_n8n
 
 # Create and activate a virtual environment
@@ -137,8 +137,11 @@ Delay	Pause workflow for a set duration
 Condition	Route execution based on logical conditions
 Python Code	Execute custom Python snippets
 LLM	Use AI models (OpenAI, Gemini, etc.) for generation or reasoning
-🌐 API Endpoints
-Endpoint	Method	Description
+
+
+----------API Endpoints----------
+
+Endpoint	Method	Description:
 /api/v1/workflows/	POST	Create new workflow
 /api/v1/workflows/	GET	List all workflows
 /api/v1/workflows/{id}	GET	Retrieve workflow
@@ -155,7 +158,7 @@ Endpoint	Method	Description
 
 Environment variables (.env):
 
-APP_NAME=mini_n8n
+APP_NAME=mini-n8n
 DATABASE_URL=sqlite+aiosqlite:///./mini_n8n.db
 LLM_PROVIDER=gemini
 OPENAI_API_KEY=your-key
@@ -200,6 +203,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 
 Add a Custom Node
+
 from .base import BaseNode
 class MyCustomNode(BaseNode):
     async def execute(self, input_data, context):
