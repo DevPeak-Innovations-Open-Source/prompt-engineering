@@ -13,12 +13,12 @@
             <a href="#api" class="text-gray-700 hover:text-blue-600 transition-colors">API</a>
             <a href="#nodes" class="text-gray-700 hover:text-blue-600 transition-colors">Nodes</a>
             <a href="#getting-started" class="text-gray-700 hover:text-blue-600 transition-colors">Docs</a>
-            <Button 
+            <button 
               @click="openApiDocs" 
-              class="bg-blue-600 hover:bg-blue-700 text-white"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
             >
               Try API
-            </Button>
+            </button>
           </div>
         </div>
       </div>
@@ -28,9 +28,9 @@
     <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto text-center">
         <div class="mb-8">
-          <Badge class="bg-blue-100 text-blue-800 text-sm px-3 py-1">
+          <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
             AI-Powered Workflow Automation
-          </Badge>
+          </span>
         </div>
         <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
           Automate Workflows with
@@ -41,14 +41,14 @@
           and seamless integration. Build, execute, and scale your automation workflows with ease.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button @click="openApiDocs" size="lg" class="bg-blue-600 hover:bg-blue-700">
+          <button @click="openApiDocs" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-base font-medium transition-colors flex items-center justify-center">
             <Icon name="i-heroicons-play" class="w-5 h-5 mr-2" />
             Try Live API
-          </Button>
-          <Button @click="scrollToSection('getting-started')" size="lg" variant="outline">
+          </button>
+          <button @click="scrollToSection('getting-started')" class="border border-gray-300 bg-transparent hover:bg-gray-100 px-6 py-3 rounded-lg text-base font-medium transition-colors flex items-center justify-center">
             <Icon name="i-heroicons-book-open" class="w-5 h-5 mr-2" />
             View Documentation
-          </Button>
+          </button>
         </div>
       </div>
     </section>
@@ -66,13 +66,13 @@
         </div>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Card v-for="feature in features" :key="feature.title" class="p-6 hover:shadow-lg transition-shadow">
+          <div v-for="feature in features" :key="feature.title" class="p-6 border rounded-lg hover:shadow-lg transition-shadow">
             <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
               <Icon :name="feature.icon" class="w-6 h-6 text-blue-600" />
             </div>
             <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ feature.title }}</h3>
             <p class="text-gray-600">{{ feature.description }}</p>
-          </Card>
+          </div>
         </div>
       </div>
     </section>
@@ -90,10 +90,10 @@
         </div>
         
         <div class="text-center mt-12">
-          <Button @click="openApiDocs" size="lg" class="bg-blue-600 hover:bg-blue-700">
+          <button @click="openApiDocs" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-base font-medium transition-colors flex items-center justify-center mx-auto">
             <Icon name="i-heroicons-arrow-top-right-on-square" class="w-5 h-5 mr-2" />
             Open Interactive API Docs
-          </Button>
+          </button>
         </div>
       </div>
     </section>
@@ -111,13 +111,13 @@
         </div>
         
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card v-for="node in nodes" :key="node.name" class="p-6 hover:shadow-lg transition-shadow">
+          <div v-for="node in nodes" :key="node.name" class="p-6 border rounded-lg hover:shadow-lg transition-shadow">
             <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
               <Icon :name="node.icon" class="w-6 h-6 text-green-600" />
             </div>
             <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ node.name }}</h3>
             <p class="text-gray-600 text-sm">{{ node.description }}</p>
-          </Card>
+          </div>
         </div>
       </div>
     </section>
@@ -192,12 +192,12 @@
           <div>
             <h4 class="font-semibold mb-4">Connect</h4>
             <div class="flex space-x-4">
-              <Button variant="ghost" size="sm" class="text-gray-400 hover:text-white">
+              <button class="text-gray-400 hover:text-white">
                 <Icon name="i-heroicons-globe-alt" class="w-5 h-5" />
-              </Button>
-              <Button variant="ghost" size="sm" class="text-gray-400 hover:text-white">
+              </button>
+              <button class="text-gray-400 hover:text-white">
                 <Icon name="i-heroicons-document-text" class="w-5 h-5" />
-              </Button>
+              </button>
             </div>
           </div>
         </div>
